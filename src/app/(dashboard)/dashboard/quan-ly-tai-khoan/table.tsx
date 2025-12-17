@@ -106,7 +106,7 @@ interface User {
 // Helper functions
 const getUserName = (user: User) => user.name || user.ten || 'Không có tên'
 const getUserPhone = (user: User) => user.phone || user.soDienThoai || ''
-const getUserRole = (user: User) => user.role || user.vaiTro || 'nhanVien'
+const getUserRole = (user: User) => user.role || user.vaiTro || ''
 const getUserAvatar = (user: User) => user.avatar || user.anhDaiDien || ''
 const getUserIsActive = (user: User) => user.isActive !== undefined ? user.isActive : (user.trangThai === 'hoatDong')
 
@@ -132,12 +132,6 @@ const getRoleBadge = (role: string) => {
       return (
         <Badge variant="default" className="gap-1">
           Chủ nhà
-        </Badge>
-      )
-    case 'nhanVien':
-      return (
-        <Badge variant="secondary" className="gap-1">
-          Nhân viên
         </Badge>
       )
     default:

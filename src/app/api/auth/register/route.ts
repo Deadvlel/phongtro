@@ -8,7 +8,7 @@ const registerSchema = z.object({
   email: z.string().email('Email không hợp lệ'),
   matKhau: z.string().min(6, 'Mật khẩu phải có ít nhất 6 ký tự'),
   soDienThoai: z.string().regex(/^[0-9]{10,11}$/, 'Số điện thoại không hợp lệ'),
-  vaiTro: z.enum(['chuNha', 'nhanVien']),
+  vaiTro: z.enum(['chuNha']),
 });
 
 export async function POST(request: NextRequest) {

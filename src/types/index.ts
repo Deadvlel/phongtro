@@ -8,10 +8,6 @@ export interface DiaChi {
   thanhPho: string;
 }
 
-export interface AnhCCCD {
-  matTruoc: string;
-  matSau: string;
-}
 
 export interface ThongTinChuyenKhoan {
   nganHang: string;
@@ -29,7 +25,7 @@ export interface NguoiDung {
   email: string;
   matKhau: string;
   soDienThoai: string;
-  vaiTro: 'admin' | 'chuNha' | 'nhanVien';
+  vaiTro: 'admin' | 'chuNha';
   anhDaiDien?: string;
   trangThai: 'hoatDong' | 'khoa';
   ngayTao: Date;
@@ -87,7 +83,6 @@ export interface KhachThue {
   ngaySinh: Date;
   gioiTinh: 'nam' | 'nu' | 'khac';
   queQuan: string;
-  anhCCCD: AnhCCCD;
   ngheNghiep?: string;
   matKhau?: string;
   trangThai: 'dangThue' | 'daTraPhong' | 'chuaThue';

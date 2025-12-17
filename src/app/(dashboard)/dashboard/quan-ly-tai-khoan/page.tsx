@@ -89,7 +89,7 @@ export default function AccountManagementPage() {
     email: '',
     password: '',
     phone: '',
-    role: 'nhanVien'
+    role: ''
   });
   const [editUserData, setEditUserData] = useState({
     name: '',
@@ -165,7 +165,7 @@ export default function AccountManagementPage() {
           email: '',
           password: '',
           phone: '',
-          role: 'nhanVien'
+          role: ''
         });
         cache.clearCache();
         fetchUsers(true);
@@ -245,9 +245,7 @@ export default function AccountManagementPage() {
       case 'admin':
         return <Badge variant="destructive">Quản trị viên</Badge>;
       case 'chuNha':
-        return <Badge variant="default">Chủ nhà</Badge>;
-      case 'nhanVien':
-        return <Badge variant="secondary">Nhân viên</Badge>;
+        return <Badge variant="default">Chủ nhà</Badge>;;
       default:
         return <Badge variant="outline">Người dùng</Badge>;
     }
@@ -265,7 +263,7 @@ export default function AccountManagementPage() {
   // Helper functions to safely get user data
   const getUserName = (user: User) => user.name || user.ten || 'Không có tên';
   const getUserPhone = (user: User) => user.phone || user.soDienThoai || '';
-  const getUserRole = (user: User) => user.role || user.vaiTro || 'nhanVien';
+  const getUserRole = (user: User) => user.role || user.vaiTro || '';
   const getUserAvatar = (user: User) => user.avatar || user.anhDaiDien || '';
   const getUserIsActive = (user: User) => user.isActive !== undefined ? user.isActive : (user.trangThai === 'hoatDong');
 
@@ -382,7 +380,6 @@ export default function AccountManagementPage() {
                     <SelectValue placeholder="Chọn vai trò" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="nhanVien" className="text-sm">Nhân viên</SelectItem>
                     <SelectItem value="chuNha" className="text-sm">Chủ nhà</SelectItem>
                     <SelectItem value="admin" className="text-sm">Quản trị viên</SelectItem>
                   </SelectContent>
@@ -435,18 +432,6 @@ export default function AccountManagementPage() {
               </p>
             </div>
             <Users className="h-3 w-3 md:h-4 md:w-4 text-blue-600" />
-          </div>
-        </Card>
-
-        <Card className="p-2 md:p-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[10px] md:text-xs font-medium text-gray-600">Nhân viên</p>
-              <p className="text-base md:text-2xl font-bold text-green-600">
-                {users.filter(u => getUserRole(u) === 'nhanVien').length}
-              </p>
-            </div>
-            <Users className="h-3 w-3 md:h-4 md:w-4 text-green-600" />
           </div>
         </Card>
       </div>
@@ -619,7 +604,6 @@ export default function AccountManagementPage() {
                   <SelectValue placeholder="Chọn vai trò" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="nhanVien" className="text-sm">Nhân viên</SelectItem>
                   <SelectItem value="chuNha" className="text-sm">Chủ nhà</SelectItem>
                   <SelectItem value="admin" className="text-sm">Quản trị viên</SelectItem>
                 </SelectContent>
