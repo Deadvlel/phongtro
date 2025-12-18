@@ -994,11 +994,7 @@ export default function HoaDonPage() {
                 </Button>
                 <Button variant="outline" size="sm" onClick={() => handleDownload(viewingHoaDon)} className="w-full sm:w-auto">
                   <Download className="h-3 w-3 md:h-4 md:w-4 mr-2" />
-                  Tải HTML
-                </Button>
-                <Button size="sm" onClick={() => handleScreenshot(viewingHoaDon)} className="w-full sm:w-auto">
-                  <Camera className="h-3 w-3 md:h-4 md:w-4 mr-2" />
-                  Xuất PDF
+                  Xuất hóa đơn
                 </Button>
               </DialogFooter>
             </div>

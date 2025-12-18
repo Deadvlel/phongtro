@@ -326,13 +326,9 @@ const createColumns = (props: HoaDonTableProps): ColumnDef<HoaDon>[] => [
             <Copy className="mr-2 h-4 w-4" />
             Sao chép link
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => props.onScreenshot(row.original)}>
-            <Camera className="mr-2 h-4 w-4" />
-            Xuất PDF
-          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => props.onDownload(row.original)}>
             <Download className="mr-2 h-4 w-4" />
-            Tải HTML
+            Xuất hóa đơn
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem 
