@@ -1,5 +1,3 @@
-// Types cho hệ thống quản lý phòng trọ
-
 export interface DiaChi {
   soNha: string;
   duong: string;

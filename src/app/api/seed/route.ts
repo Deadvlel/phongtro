@@ -57,10 +57,10 @@ export async function POST(request: NextRequest) {
         tenToaNha: `Toa Nha Landmark 0${i}`,
         diaChi: {
           soNha: `${i * 5}`,
-          duong: 'Le Duan',
-          phuong: 'Phuong Lien',
-          quan: 'Dong Da',
-          thanhPho: 'Ha Noi',
+          duong: 'Mai Lao Bang',
+          phuong: 'Thanh Binh',
+          quan: 'Hai Chau',
+          thanhPho: 'Da Nang',
         },
         moTa: `Toà nhà cao cấp số ${i}`,
         tienNghiChung: tienNghiToaNha,
@@ -109,7 +109,7 @@ export async function POST(request: NextRequest) {
         cccd: k.cccd,
         ngaySinh: new Date('1998-05-20'),
         gioiTinh: 'nam',
-        queQuan: 'Hà Nội',
+        queQuan: 'Da Nang',
         trangThai: 'chuaThue'
       });
     }

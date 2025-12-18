@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import bcrypt from 'bcryptjs';
 
 export interface IKhachThue extends Document {
   hoTen: string;

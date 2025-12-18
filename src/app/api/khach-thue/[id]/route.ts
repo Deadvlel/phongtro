@@ -14,7 +14,6 @@ const khachThueSchema = z.object({
   gioiTinh: z.enum(['nam', 'nu', 'khac']),
   queQuan: z.string().min(1, 'Quê quán là bắt buộc'),
   ngheNghiep: z.string().optional(),
-  matKhau: z.string().min(6, 'Mật khẩu phải có ít nhất 6 ký tự').optional(),
 });
 
 export async function GET(
@@ -93,40 +92,13 @@ export async function PUT(
       );
     }
 
-    // Prepare update data
-    const updateData: any = {
-      ...validatedData,
-      ngaySinh: new Date(validatedData.ngaySinh),
-    };
-
-    // Nếu có mật khẩu mới, cập nhật
-    // Mật khẩu sẽ tự động hash qua pre-save middleware
-    if (validatedData.matKhau) {
-      const khachThue = await KhachThue.findById(id);
-      if (!khachThue) {
-        return NextResponse.json(
-          { message: 'Khách thuê không tồn tại' },
-          { status: 404 }
-        );
-      }
-      
-      // Set mật khẩu mới và save để trigger middleware
-      Object.assign(khachThue, updateData);
-      khachThue.matKhau = validatedData.matKhau;
-      await khachThue.save();
-      
-      return NextResponse.json({
-        success: true,
-        data: khachThue,
-        message: 'Khách thuê đã được cập nhật thành công',
-      });
-    }
-
-    // Nếu không có mật khẩu mới, update bình thường
-    delete updateData.matKhau;
+    // Update khách thuê
     const khachThue = await KhachThue.findByIdAndUpdate(
       id,
-      updateData,
+      {
+        ...validatedData,
+        ngaySinh: new Date(validatedData.ngaySinh),
+      },
       { new: true, runValidators: true }
     );
 

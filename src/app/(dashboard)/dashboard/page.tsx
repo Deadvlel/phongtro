@@ -71,119 +71,105 @@ export default function DashboardPage() {
 
   if (!stats) return null;
 
-  // Tính toán phần trăm cho thanh hiển thị trạng thái phòng
   const percentRented = Math.round((stats.phongDangThue / stats.tongSoPhong) * 100) || 0;
-  const percentEmpty = Math.round((stats.phongTrong / stats.tongSoPhong) * 100) || 0;
-  const percentMaintenance = Math.round((stats.phongBaoTri / stats.tongSoPhong) * 100) || 0;
+const percentEmpty = Math.round((stats.phongTrong / stats.tongSoPhong) * 100) || 0;
+const percentMaintenance = Math.round((stats.phongBaoTri / stats.tongSoPhong) * 100) || 0;
 
-  return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-sm text-gray-600 mt-1">Tổng quan hệ thống quản lý phòng trọ</p>
-      </div>
+return (
+  <div className="space-y-6">
+    {/* Header */}
+    <div>
+      <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Dashboard</h1>
+      <p className="text-sm text-gray-600 mt-1">Tổng quan hệ thống quản lý phòng trọ</p>
+    </div>
 
-      {/* Stats Cards - Hàng 1: Các chỉ số chính */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-        <Card className="p-4 shadow-sm border-l-4 border-l-blue-500">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-medium text-gray-600 uppercase">Tổng phòng</p>
-              <p className="text-2xl font-bold mt-1">{stats.tongSoPhong}</p>
-              <p className="text-xs text-gray-500 mt-1">
-                Quy mô hệ thống
-              </p>
-            </div>
-            <div className="p-2 bg-blue-50 rounded-lg">
-                <Building2 className="h-5 w-5 text-blue-600" />
-            </div>
+    {/* Stats Cards - Hàng 1: Các chỉ số chính */}
+    {/* ✅ THAY ĐỔI: grid-cols-4 → grid-cols-3 */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+      <Card className="p-4 shadow-sm border-l-4 border-l-blue-500">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-xs font-medium text-gray-600 uppercase">Tổng phòng</p>
+            <p className="text-2xl font-bold mt-1">{stats.tongSoPhong}</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Quy mô hệ thống
+            </p>
           </div>
-        </Card>
-
-        <Card className="p-4 shadow-sm border-l-4 border-l-green-500">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-medium text-gray-600 uppercase">Phòng trống</p>
-              <p className="text-2xl font-bold mt-1 text-green-600">{stats.phongTrong}</p>
-              <p className="text-xs text-gray-500 mt-1">
-                {percentEmpty}% tổng số phòng
-              </p>
-            </div>
-            <div className="p-2 bg-green-50 rounded-lg">
-                <DoorOpen className="h-5 w-5 text-green-600" />
-            </div>
+          <div className="p-2 bg-blue-50 rounded-lg">
+            <Building2 className="h-5 w-5 text-blue-600" />
           </div>
-        </Card>
+        </div>
+      </Card>
 
-        <Card className="p-4 shadow-sm border-l-4 border-l-indigo-500">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-medium text-gray-600 uppercase">Doanh thu tháng</p>
-              <p className="text-2xl font-bold mt-1 text-indigo-700">{formatCurrency(stats.doanhThuThang)}</p>
-              <p className="text-xs text-gray-500 mt-1">
-                Thực thu tháng này
-              </p>
-            </div>
-            <div className="p-2 bg-indigo-50 rounded-lg">
-                <TrendingUp className="h-5 w-5 text-indigo-600" />
-            </div>
+      <Card className="p-4 shadow-sm border-l-4 border-l-green-500">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-xs font-medium text-gray-600 uppercase">Phòng trống</p>
+            <p className="text-2xl font-bold mt-1 text-green-600">{stats.phongTrong}</p>
+            <p className="text-xs text-gray-500 mt-1">
+              {percentEmpty}% tổng số phòng
+            </p>
           </div>
-        </Card>
+          <div className="p-2 bg-green-50 rounded-lg">
+            <DoorOpen className="h-5 w-5 text-green-600" />
+          </div>
+        </div>
+      </Card>
 
-        <Card className="p-4 shadow-sm border-l-4 border-l-red-500">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs font-medium text-gray-600 uppercase">Sự cố</p>
-              <p className="text-xs text-gray-500 mt-1">
-                Đang chờ xử lý
-              </p>
-            </div>
-            <div className="p-2 bg-red-50 rounded-lg">
-                <AlertTriangle className="h-5 w-5 text-red-600" />
-            </div>
+      <Card className="p-4 shadow-sm border-l-4 border-l-indigo-500">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-xs font-medium text-gray-600 uppercase">Doanh thu tháng</p>
+            <p className="text-2xl font-bold mt-1 text-indigo-700">{formatCurrency(stats.doanhThuThang)}</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Thực thu tháng này
+            </p>
           </div>
-        </Card>
-      </div>
+          <div className="p-2 bg-indigo-50 rounded-lg">
+            <TrendingUp className="h-5 w-5 text-indigo-600" />
+          </div>
+        </div>
+      </Card>
+    </div>
 
-      {/* Secondary Stats - Hàng 2: Các công việc cần chú ý */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="p-4 hover:shadow-md transition-shadow">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-orange-100 rounded-full">
-               <Calendar className="h-6 w-6 text-orange-600" />
-            </div>
-            <div>
-               <p className="text-sm font-medium text-gray-600">Hóa đơn sắp đến hạn</p>
-               <p className="text-2xl font-bold text-gray-900">{stats.hoaDonSapDenHan}</p>
-            </div>
+    {/* Secondary Stats - Hàng 2: Các công việc cần chú ý */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <Card className="p-4 hover:shadow-md transition-shadow">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-orange-100 rounded-full">
+            <Calendar className="h-6 w-6 text-orange-600" />
           </div>
-        </Card>
+          <div>
+            <p className="text-sm font-medium text-gray-600">Hóa đơn sắp đến hạn</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.hoaDonSapDenHan}</p>
+          </div>
+        </div>
+      </Card>
 
-        <Card className="p-4 hover:shadow-md transition-shadow">
-           <div className="flex items-center gap-4">
-            <div className="p-3 bg-yellow-100 rounded-full">
-               <Clock className="h-6 w-6 text-yellow-600" />
-            </div>
-            <div>
-               <p className="text-sm font-medium text-gray-600">Hợp đồng sắp hết hạn</p>
-               <p className="text-2xl font-bold text-gray-900">{stats.hopDongSapHetHan}</p>
-            </div>
+      <Card className="p-4 hover:shadow-md transition-shadow">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-yellow-100 rounded-full">
+            <Clock className="h-6 w-6 text-yellow-600" />
           </div>
-        </Card>
+          <div>
+            <p className="text-sm font-medium text-gray-600">Hợp đồng sắp hết hạn</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.hopDongSapHetHan}</p>
+          </div>
+        </div>
+      </Card>
 
-        <Card className="p-4 hover:shadow-md transition-shadow">
-           <div className="flex items-center gap-4">
-            <div className="p-3 bg-teal-100 rounded-full">
-               <TrendingUp className="h-6 w-6 text-teal-600" />
-            </div>
-            <div>
-               <p className="text-sm font-medium text-gray-600">Tổng doanh thu năm</p>
-               <p className="text-xl font-bold text-gray-900">{formatCurrency(stats.doanhThuNam)}</p>
-            </div>
+      <Card className="p-4 hover:shadow-md transition-shadow">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-teal-100 rounded-full">
+            <TrendingUp className="h-6 w-6 text-teal-600" />
           </div>
-        </Card>
-      </div>
+          <div>
+            <p className="text-sm font-medium text-gray-600">Tổng doanh thu năm</p>
+            <p className="text-xl font-bold text-gray-900">{formatCurrency(stats.doanhThuNam)}</p>
+          </div>
+        </div>
+      </Card>
+    </div>
 
       {/* Bottom Section: Thay thế Activity bằng Room Overview Visual */}
       <Card className="overflow-hidden">

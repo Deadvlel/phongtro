@@ -8,7 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { ImageUpload } from '@/components/ui/image-upload';
 import { HoaDonDataTable } from './table';
 import { DeleteConfirmPopover } from '@/components/ui/delete-confirm-popover';
 import {
@@ -1221,18 +1220,6 @@ function PaymentForm({
               placeholder="Ghi chú về giao dịch..."
               className="h-10 md:h-12 text-sm"
             />
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <Label className="text-xs md:text-sm">Ảnh biên lai thanh toán</Label>
-          <ImageUpload
-            imageUrl={formData.anhBienLai}
-            onImageChange={(url) => setFormData(prev => ({ ...prev, anhBienLai: url }))}
-            placeholder="Chọn ảnh biên lai thanh toán"
-          />
-          <div className="text-[10px] md:text-xs text-gray-500">
-            📷 Tải lên ảnh biên lai để xác nhận giao dịch (tùy chọn)
           </div>
         </div>
 

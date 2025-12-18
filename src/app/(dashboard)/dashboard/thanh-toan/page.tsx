@@ -32,7 +32,6 @@ import {
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { ImageUpload } from '@/components/ui/image-upload';
 import { DeleteConfirmPopover } from '@/components/ui/delete-confirm-popover';
 import { 
   Plus, 
@@ -724,13 +723,6 @@ function ThanhToanForm({
           className="text-sm"
         />
       </div>
-
-      <ImageUpload
-        imageUrl={formData.anhBienLai}
-        onImageChange={(url) => setFormData(prev => ({ ...prev, anhBienLai: url }))}
-        label="Ảnh biên lai"
-        placeholder="Chọn ảnh biên lai thanh toán"
-      />
 
       <DialogFooter className="flex-col sm:flex-row gap-2">
         <Button type="button" variant="outline" size="sm" onClick={onClose} className="w-full sm:w-auto">

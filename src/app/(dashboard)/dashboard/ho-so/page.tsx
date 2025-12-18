@@ -200,12 +200,6 @@ export default function ProfilePage() {
                 <div className="space-y-2 text-center sm:text-left">
                   <h3 className="text-base md:text-lg font-medium">{formData.name}</h3>
                   {profile?.role && getRoleBadge(profile.role)}
-                  {isEditing && (
-                    <Button variant="outline" size="sm" className="text-xs md:text-sm">
-                      <Camera className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />
-                      Thay đổi ảnh
-                    </Button>
-                  )}
                 </div>
               </div>
 

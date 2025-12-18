@@ -100,7 +100,7 @@ export default function LoginPage() {
             <h1 className="text-2xl font-semibold tracking-tight">
               Đăng nhập tài khoản
             </h1>
-            <p className="text-sm text-muted-foreground text-gray-500">
+            <p className="text-sm text-gray-500">
               Nhập email và mật khẩu để truy cập trang quản trị
             </p>
           </div>

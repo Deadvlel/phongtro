@@ -45,77 +45,43 @@ export function NavMain({
   }[]
 }) {
   const pathname = usePathname()
-  const { isMobile, state } = useSidebar()
-  const [openDropdown, setOpenDropdown] = React.useState<string | null>(null)
+  const { state } = useSidebar() // Bỏ isMobile ở đây
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Menu</SidebarGroupLabel>
+      <SidebarGroupLabel>Menu hệ thống</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
-          // Khi sidebar collapsed và không phải mobile, dùng DropdownMenu
-          if (state === "collapsed" && !isMobile) {
+          // CHẾ ĐỘ 1: Khi Sidebar thu nhỏ (Collapsed) -> Dùng Dropdown
+          if (state === "collapsed") {
             return (
               <SidebarMenuItem key={item.title}>
-                <DropdownMenu 
-                  open={openDropdown === item.title}
-                  onOpenChange={(open) => {
-                    setOpenDropdown(open ? item.title : null)
-                  }}
-                >
+                <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <SidebarMenuButton
-                      className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                    >
+                    <SidebarMenuButton tooltip={item.title}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
                     </SidebarMenuButton>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    className="min-w-48 rounded-lg"
-                    side="right"
-                    align="start"
-                    sideOffset={4}
-                    onCloseAutoFocus={(e) => e.preventDefault()}
-                  >
-                    <DropdownMenuLabel className="flex items-center gap-2">
-                      {item.icon && <item.icon className="h-4 w-4" />}
-                      {item.title}
-                    </DropdownMenuLabel>
+                  <DropdownMenuContent side="right" align="start" className="min-w-48">
+                    <DropdownMenuLabel>{item.title}</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    {item.items?.map((subItem) => {
-                      const isActive = pathname === subItem.url
-                      return (
-                        <DropdownMenuItem 
-                          key={subItem.title} 
-                          asChild
-                          onSelect={() => {
-                            setOpenDropdown(null)
-                          }}
-                        >
-                          <Link 
-                            href={subItem.url}
-                            className={isActive ? "bg-sidebar-accent" : ""}
-                          >
-                            {subItem.title}
-                          </Link>
-                        </DropdownMenuItem>
-                      )
-                    })}
+                    {item.items?.map((subItem) => (
+                      <DropdownMenuItem key={subItem.title} asChild>
+                        <Link href={subItem.url} className={pathname === subItem.url ? "bg-accent" : ""}>
+                          {subItem.title}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </SidebarMenuItem>
             )
           }
 
-          // Khi sidebar expanded hoặc mobile, dùng Collapsible
+          // CHẾ ĐỘ 2: Khi Sidebar mở rộng -> Dùng Collapsible (Xổ xuống)
           return (
-            <Collapsible
-              key={item.title}
-              asChild
-              defaultOpen={item.isActive}
-              className="group/collapsible"
-            >
+            <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
                   <SidebarMenuButton tooltip={item.title}>
@@ -126,18 +92,15 @@ export function NavMain({
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {item.items?.map((subItem) => {
-                      const isActive = pathname === subItem.url
-                      return (
-                        <SidebarMenuSubItem key={subItem.title}>
-                          <SidebarMenuSubButton asChild isActive={isActive}>
-                            <Link href={subItem.url}>
-                              <span>{subItem.title}</span>
-                            </Link>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                      )
-                    })}
+                    {item.items?.map((subItem) => (
+                      <SidebarMenuSubItem key={subItem.title}>
+                        <SidebarMenuSubButton asChild isActive={pathname === subItem.url}>
+                          <Link href={subItem.url}>
+                            <span>{subItem.title}</span>
+                          </Link>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
                   </SidebarMenuSub>
                 </CollapsibleContent>
               </SidebarMenuItem>

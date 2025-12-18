@@ -17,7 +17,6 @@ const khachThueSchema = z.object({
   gioiTinh: z.enum(['nam', 'nu', 'khac']),
   queQuan: z.string().min(1, 'Quê quán là bắt buộc'),
   ngheNghiep: z.string().optional(),
-  matKhau: z.string().min(6, 'Mật khẩu phải có ít nhất 6 ký tự').optional(),
 });
 
 export async function GET(request: NextRequest) {
@@ -56,7 +55,6 @@ export async function GET(request: NextRequest) {
     }
 
     const khachThueList = await KhachThue.find(query)
-      .select('+matKhau') // Include password field to check if exists
       .sort({ hoTen: 1 })
       .skip((page - 1) * limit)
       .limit(limit);
@@ -68,7 +66,6 @@ export async function GET(request: NextRequest) {
 
     // Lấy lại dữ liệu với trạng thái đã cập nhật
     const updatedKhachThueList = await KhachThue.find(query)
-      .select('+matKhau') // Include password field to check if exists
       .sort({ hoTen: 1 })
       .skip((page - 1) * limit)
       .limit(limit);
@@ -95,12 +92,8 @@ export async function GET(request: NextRequest) {
           }
         });
         
-        const khachThueObj = khachThue.toObject();
-        // Chuyển matKhau thành boolean để frontend biết đã có mật khẩu hay chưa
-        // Không trả về giá trị thực của mật khẩu (đã hash)
         return {
-          ...khachThueObj,
-          matKhau: !!khachThueObj.matKhau ? '******' : undefined,
+          ...khachThue.toObject(),
           hopDongHienTai: hopDong
         };
       })
